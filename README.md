@@ -18,7 +18,7 @@ wifi.connect({ ssid: 'my-wifi-name', password: 'my-password' }, (err) => {
   if (err) {
     console.error(err);
   } else {
-    console.log('connected to wifi, connecting to mqtt broker');
+    console.log('connected to wifi, connecting to MQTT broker');
     mqttClient.connect();
   }
 });
@@ -27,6 +27,7 @@ wifi.connect({ ssid: 'my-wifi-name', password: 'my-password' }, (err) => {
 // MQTT client event handlers
 mqttClient.on('connect', () => {
   console.log('Connected to MQTT broker');
+  mqttClient.publish('my-topic', 'hello world!');
 });
 
 // data is an object that contains the message and topic as properties
