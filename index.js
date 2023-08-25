@@ -5,6 +5,7 @@ var SimpleBuffer = require('buffer'); // Custom buffer class with basic function
 class MQTTClient extends EventEmitter {
 
   constructor(clientId, brokerIp) {
+    super();
     this.messageId = 1;
     this.subscriptions = [];
     this.clientId = clientId || 'kaluma-mqtt-client_' + Math.random().toString(16).substring(2, 8);
@@ -26,8 +27,8 @@ class MQTTClient extends EventEmitter {
     });
     this.socket.on('data', (data) => {
       // decode the data
-      const data = this.decodePacket(data);
-      this.emit('message', data); // Emitting the 'message' event and passing the data.
+      const decodedData = this.decodePacket(data);
+      this.emit('message', decodedData); // Emitting the 'message' event and passing the data.
       console.log(data);
     });
     this.socket.on('end', () => {
@@ -161,29 +162,4 @@ class MQTTClient extends EventEmitter {
 }
 
 
-module.exports = MQTTClient;
-
-
-/* //*Example usage as a client:
-
-var mqttClient = new MQTTClient('myClientId', 'brokerIP');
-
-mqttClient.on('connect', () => {
-  console.log('Connected to MQTT broker');
-});
-
-mqttClient.on('message', (data) => {
-  console.log('Received message:', data);
-});
-
-mqttClient.on('disconnect', () => {
-  console.log('Disconnected from MQTT broker');
-});
-
-mqttClient.on('error', (err) => {
-  console.error('Error:', err);
-});
-
-mqttClient.connect();
-
-*/
+exports.MQTTClient = MQTTClient;
