@@ -10,7 +10,7 @@ const { WiFi } = require('wifi');
 const { MQTTClient } = require('mqtt');
 
 const wifi = new WiFi();
-var mqttClient = new MQTTClient('myClientId', 'myBrokerIp');
+cont mqttClient = new MQTTClient('myClientId', 'myBrokerIp');
 
 
 // Connect to WiFi and then connect to MQTT broker
