@@ -6,6 +6,9 @@
 
 # Basic Example:
 ```javascript
+const { MQTTClient } = require('mqtt');
+
+// must be connected to Wi-Fi prior to attempting this
 var mqttClient = new MQTTClient('myClientId', 'brokerIP');
 
 mqttClient.on('connect', () => {
